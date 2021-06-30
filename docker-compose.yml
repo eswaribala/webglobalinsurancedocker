@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=amexdb
+    ports:
+      - '3306:3306'
+    volumes:
+      - /data/mysql
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - "7070:7070"
